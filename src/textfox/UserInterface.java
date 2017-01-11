@@ -43,7 +43,6 @@ public class UserInterface {
 		urlStack.push(Url);
 		UrlParser getter = new UrlParser(Url);
 		RegexHtmlParser links = new RegexHtmlParser(getter.getHtml());
-		links.getLinks();
 		linkList = links.getLink();
 		nameList = links.getNames();
 		System.out.println("Title: " + links.getTitle());

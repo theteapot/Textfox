@@ -15,6 +15,11 @@ public class RegexHtmlParser {
 	
 	public RegexHtmlParser(String html) {
 		this.html = html;
+		ArrayList<String> anchors = regexMatcher(this.html,"<a.*?/a>");
+		for (String link : anchors) {
+			links.add(regexMatcher(link, "\"http://(.*?)\"").toString().replaceAll("\"",""));
+			names.add(regexMatcher(link, ">.*?<").toString().replaceAll("[<>]",""));
+		}
 	}
 	
 	public ArrayList<String> getLink() {
@@ -29,14 +34,6 @@ public class RegexHtmlParser {
 	
 	public ArrayList<String> getNames() {
 		return this.names;
-	}
-	
-	public void getLinks() {
-		ArrayList<String> anchors = regexMatcher(this.html,"<a.*?/a>");
-		for (String link : anchors) {
-			links.add(regexMatcher(link, "\"http://(.*?)\"").toString().replaceAll("\"",""));
-			names.add(regexMatcher(link, ">.*?<").toString().replaceAll("[<>]",""));
-		}
 	}
 	
 	private static ArrayList<String> regexMatcher(String searchString, String expression){
